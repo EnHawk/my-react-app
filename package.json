@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "create-react-app client",
     "backend": "cd ./server && npm start",
+    "backend:test": "cd ./server && npm test",
     "frontend": "cd ./client && npm start"
   },
   "author": "EnHawk",

@@ -1,10 +1,17 @@
+// Imports
 const express = require("express")
-const app = express()
+const { Collection } = require("discord.js")
 const config = require(`./config.json`)
+const datastoreRoute = require(`./routes/datastore.js`)
+const userRoute = require(`./routes/users.js`)
 
-app.get("/api", (req, res) => {
-    res.json({ users: [ `foo`, `bar` ] })
-})
+// Initialization
+const app = express()
+const DataStore = new Collection()
+
+// Main
+app.use(`/datastore`, datastoreRoute)
+app.use(`/users`, userRoute)
 
 app.listen(config.port, () => {
     console.log(`Listening On Port ${config.port}.`)
