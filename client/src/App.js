@@ -1,25 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
-import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom'
+import About from './pages/About.js'
+import Home from './pages/Home.js'
 
 function App() {
-  const [backendData, setBackendData] = useState([{}])
-  
-  useEffect(() => {
-    fetch(`/api`).then(res => { return res.json() }).then(data => { setBackendData(data) })
-  }, [])
-
   return (
-    <div className="App">
-      {
-        (typeof backendData.data === `undefined`) ?
-        (<p>Loading Data...</p>) :
-        (<div>
-          <blockquote>{backendData.data.quote}</blockquote>
-          <blockquote>- {backendData.data.author}</blockquote>
-        </div>)
-      }
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+    </Routes>
   );
 }
 

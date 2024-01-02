@@ -10,7 +10,6 @@ const app = express()
 const DataStore = new Collection()
 
 // Main
-app.use(`/datastore`, datastoreRoute)
 app.use(`/users`, userRoute)
 
 app.listen(config.port, () => {

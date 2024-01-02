@@ -2,6 +2,7 @@
 const express = require(`express`)
 const { Collection } = require(`discord.js`)
 const { encrypt, decrypt } = require(`../utils/cipher.js`)
+const { admin_authorization } = require(`../config.json`)
 
 // Initialization
 const router = express.Router()
@@ -96,7 +97,10 @@ router.get(`/:id`, (req, res) => {
 })
 
 router.post(`/`, (req, res) => {
-    function createUser({ username, password, status }) {
+    function createUser(profile, status, auth) {
+        const { username, avatar } = profile
+        const { password } = auth
+
         if (Users.find(u => u.username === username)) {
             res.status(400).json({ error: `Username already used.` })
             return;
@@ -110,7 +114,21 @@ router.post(`/`, (req, res) => {
             authorization.api_key = encrypt(generateKey(), `api`)
         }
 
-        Users.set(collectionName, { username, user_id, password: encrypt(password, username), status, authorization })
+        const data = {
+            profile: {
+                username,
+                avatar_url,
+                created_at: Date.now()
+            },
+            status,
+            authentication: {
+                username: encrypt(username, username),
+                password: encrypt(password, username)
+            },
+            authorization
+        }
+
+        Users.set(collectionName, data)
 
         const user = Users.get(collectionName)
 
@@ -130,17 +148,23 @@ router.post(`/`, (req, res) => {
         return;
     }
 
-    if (!req.body.username) {
+    if (!req.body.profile.username) {
         res.status(400).json({ error: `Username required.` })
         return;
     }
 
     const username = req.body.username
 
-    if (!req.body.password) {
+    if (!req.body.profile.avatar) {
+
+    }
+
+    if (!req.body.auth.password) {
         res.status(400).json({ error: `User's password required.` })
         return;
     }
+
+    
 
     const password = req.body.password
 
@@ -151,7 +175,17 @@ router.post(`/`, (req, res) => {
 
     const status = req.body.status
 
-    createUser({ username, password, status })
+    createUser(
+        {
+            username,
+            avatar
+        },
+        status,
+        {
+            password
+        }
+
+    )
 })
 
 // Exports
