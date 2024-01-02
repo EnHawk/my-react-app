@@ -125,7 +125,7 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# Config file
+# Configuration file
 *config.json
 
 # yarn v2
