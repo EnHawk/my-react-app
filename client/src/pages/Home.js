@@ -1,18 +1,15 @@
 import '../App.css'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
 
 function Home() {
+  useEffect(() => {
+    document.title = `Baru Project`
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
-        <p>Welcome To A React Based Application! 👋</p>
-        <br />
-        <p>Links</p>
-        <ul>
-          <li>
-            <Link to="/about" target="_blank">About Page</Link>
-          </li>
-        </ul>
+        Dino asem celek 😂
       </header>
     </div>
   )
