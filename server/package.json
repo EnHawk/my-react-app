@@ -11,7 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^14.14.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "firebase": "^10.8.0",
+    "mineflayer": "^4.19.0",
+    "twitter-api-v2": "^1.16.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

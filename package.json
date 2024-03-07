@@ -5,14 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "functions": "cd ./functions && npm start",
     "backend": "cd ./server && npm start",
     "backend:test": "cd ./server && npm test",
     "frontend": "cd ./client && npm start",
-    "frontend:build": "cd ./client && npm run build"
+    "frontend:build": "cd ./client && npm run build",
+    "frontend:dev": "cd ./client && npm run dev",
+    "server": "npm run frontend && npm run backend"
   },
   "author": "EnHawk",
   "license": "ISC",
   "devDependencies": {
     "create-react-app": "^5.0.1"
+  },
+  "dependencies": {
+    "create-next-app": "^14.1.1"
   }
 }
